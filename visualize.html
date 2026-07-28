@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vehicle Detection Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { width: 50%; margin: auto; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid black; }
+        th { background-color: #007bff; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Final Vehicle Detection Results</h1>
+    <table>
+        <tr><th>Vehicle Type</th><th>Count</th></tr>
+        <tr><td>Cars</td><td>{{ vehicle_count['Car'] }}</td></tr>
+        <tr><td>Bikes</td><td>{{ vehicle_count['Motorbike'] }}</td></tr>
+        <tr><td>Buses</td><td>{{ vehicle_count['Bus'] }}</td></tr>
+        <tr><td>Trucks</td><td>{{ vehicle_count['Truck'] }}</td></tr>
+        <tr><th>Total</th><th>{{ vehicle_count['Total'] }}</th></tr>
+    </table>
+    <br>
+    <a href="/">Go to Home</a>
+</body>
+</html>
