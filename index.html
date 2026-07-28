@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DECENTRALIZED TRAFFIC PREDICTION USING FEDERATED LEARNING AND GRU MODEL</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  <style>
+    .wrap{max-width:1050px;margin:0 auto;padding:24px}
+    .panel{background:rgba(20,30,40,0.92);border:1px solid rgba(255,255,255,0.12);
+           border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
+    input[type=file]{display:block;margin-top:10px}
+    button{margin-top:12px;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);
+           background:rgba(255,255,255,0.06);color:#fff;cursor:pointer}
+    button:hover{background:rgba(255,255,255,0.12)}
+    pre{white-space:pre-wrap}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="title">DECENTRALIZED TRAFFIC PREDICTION USING FEDERATED LEARNING AND GRU MODEL</div>
+    <div class="nav">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/stream">YOLO Stream</a>
+      <a href="/vehicle_detection">Vehicle Count</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="panel">
+      <h2 style="text-align:left;margin:0 0 10px 0;">Upload Video (Edge Node Input)</h2>
+      <div style="opacity:0.85">
+        Upload a traffic video. YOLO detects vehicles and updates the dashboard live.
+      </div>
+      <form id="uploadForm">
+        <input id="fileInput" type="file" name="file" accept="video/*" required />
+        <button type="submit">Upload Video</button>
+      </form>
+      <pre id="out" style="margin-top:14px;background:#0b1118;border:1px solid rgba(255,255,255,0.12);padding:12px;border-radius:12px;overflow:auto;"></pre>
+    </div>
+
+    <div class="panel" style="margin-top:18px;">
+      <h2 style="text-align:left;margin:0 0 10px 0;">Federated Learning APIs (Abstract Requirement)</h2>
+      <div style="opacity:0.85">These endpoints share only model weights (privacy-preserving):</div>
+      <ul style="opacity:0.85">
+        <li><b>GET</b> /fl/get_global</li>
+        <li><b>POST</b> /fl/local_train</li>
+        <li><b>POST</b> /fl/aggregate</li>
+        <li><b>POST</b> /fl/predict</li>
+      </ul>
+    </div>
+  </div>
+<div class="panel" style="margin-top:20px;">
+  <h2>Federated Learning Status</h2>
+
+  <div class="fl-box">
+    <div class="fl-node">
+      <h3>Edge Node 1 (Camera A)</h3>
+      <p>Status: <span class="ok">Local Training Complete</span></p>
+    </div>
+
+    <div class="fl-node">
+      <h3>Edge Node 2 (Camera B)</h3>
+      <p>Status: <span class="ok">Local Training Complete</span></p>
+    </div>
+
+    <div class="fl-node">
+      <h3>Edge Node 3 (Camera C)</h3>
+      <p>Status: <span class="ok">Local Training Complete</span></p>
+    </div>
+
+    <div class="fl-server">
+      <h3>Federated Server</h3>
+      <p>Aggregation Method: <b>FedAvg</b></p>
+      <p>Status: <span class="ok">Global Model Updated</span></p>
+    </div>
+  </div>
+
+  <p class="note-text">
+    ✔ Raw traffic data never leaves edge devices
+    ✔ Only GRU model weights are shared
+    ✔ Privacy-preserving decentralized learning
+  </p>
+</div>
+
+<script>
+document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const out = document.getElementById("out");
+  out.textContent = "Uploading...";
+  const file = document.getElementById("fileInput").files[0];
+  const fd = new FormData();
+  fd.append("file", file);
+
+  const res = await fetch("/upload", { method: "POST", body: fd });
+  const data = await res.json();
+  out.textContent = JSON.stringify(data, null, 2) + "\\n\\nNow open /stream and /dashboard";
+});
+</script>
+</body>
+</html>
