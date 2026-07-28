@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Traffic Prediction Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="title">Traffic Prediction Dashboard</div>
+  <div class="nav">
+    <a href="/">Home</a>
+    <a href="/stream">YOLO Stream</a>
+    <a href="/vehicle_detection">Vehicle Count</a>
+  </div>
+</div>
+
+<div class="note">
+  Live video processed in background till end. Dashboard auto-refreshes every 1 second.
+  <span id="statusBox" style="margin-left:10px; opacity:0.95;"></span>
+</div>
+
+<div class="dashboard">
+
+  <div class="card image-card">
+    <img src="{{ url_for('static', filename='images/traffic_flow.jpg') }}" class="card-bg" alt="bg">
+    <div class="card-content">
+      <h2>Traffic Flow Prediction</h2>
+      <canvas id="flowChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card image-card">
+    <img src="{{ url_for('static', filename='images/traffic_distribution.jpg') }}" class="card-bg" alt="bg">
+    <div class="card-content">
+      <h2>Traffic Distribution</h2>
+      <center><canvas id="distributionChart"></canvas></center>
+      <div class="legend">
+        <span><span class="dot car"></span>Truck</span>
+        <span><span class="dot bike"></span>Cars</span>
+        <span><span class="dot bus"></span>Buses</span>
+        <span><span class="dot truck"></span>Total</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card image-card">
+    <img src="{{ url_for('static', filename='images/congestion.jpg') }}" class="card-bg" alt="bg">
+    <div class="card-content">
+      <h2>Congested Areas</h2>
+     <canvas id="congestionChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card image-card">
+    <img src="{{ url_for('static', filename='images/prediction.jpg') }}" class="card-bg" alt="bg">
+    <div class="card-content">
+      <h2>Predicted Traffic</h2>
+      <canvas id="predictionChart"></canvas>
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
