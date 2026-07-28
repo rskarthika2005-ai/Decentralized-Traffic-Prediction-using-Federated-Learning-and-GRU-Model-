@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YOLO Live Stream</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  <style>
+    .wrap{padding:24px}
+    img{max-width:100%;border-radius:16px;border:1px solid rgba(255,255,255,0.12)}
+    .nav a{margin-right:10px}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="title">YOLO Vehicle Counting Stream</div>
+    <div class="nav">
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/vehicle_detection">Vehicle Count</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <p style="opacity:0.85;margin-top:0">Upload a video on Home. Keep this page open; dashboard will update while this stream runs.</p>
+    <img src="/video_feed" />
+  </div>
+</body>
+</html>
