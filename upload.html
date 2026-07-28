@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload & Live Stream</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .video-container { margin-top: 20px; }
+        img { width: 700px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Upload Video & Live Stream</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if video_path %}
+    <div class="video-container">
+        <h2>Live Stream</h2>
+        <img src="/video_feed" width="700">
+    </div>
+    {% endif %}
+
+    <br>
+    <a href="/vehicle_detection">View Detection Results</a>
+</body>
+</html>
